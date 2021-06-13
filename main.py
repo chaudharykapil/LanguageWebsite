@@ -24,7 +24,7 @@ else:
     app.config['SQLALCHEMY_DATABASE_URI'] = params['prod_uri']
 
 db = SQLAlchemy(app)
-
+print("this is change")
 
 class Contacts(db.Model):
     sno = db.Column(db.Integer, primary_key=True)
