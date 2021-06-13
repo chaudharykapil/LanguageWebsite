@@ -55,10 +55,10 @@ def home():
     return render_template('home.html', params=params,languages = languages)
 
 
-@app.route("/post/<string:post_slug>", methods=['GET'])
-def post(post_slug):
-    posts = Posts.query.filter_by(slug=post_slug).first()
-    return render_template('post2.html',post=posts,params=params)
+@app.route("/post/<string:language_slug>", methods=['GET'])
+def post(languages_slug):
+    languages = Languages.query.filter_by(slug=languages_slug).first()
+    return render_template('post2.html',languages=languages,params=params)
 
 @app.route("/about")
 def about():
@@ -83,5 +83,5 @@ def contact():
     return render_template('contact.html', params=params)
 
 
-app.run(debug=True)
+#app.run(debug=True)
 
