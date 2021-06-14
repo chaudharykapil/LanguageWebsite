@@ -7,7 +7,7 @@ from datetime import datetime
 
 with open('config.json', 'r') as c:
     params = json.load(c)["params"]
-
+print("hi")
 local_server = True
 app = Flask(__name__)
 app.config.update(
