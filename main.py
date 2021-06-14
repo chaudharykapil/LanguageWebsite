@@ -55,10 +55,10 @@ def home():
     return render_template('home.html', params=params,languages = languages)
 
 
-@app.route("/post/<string:language_slug>", methods=['GET'])
+@app.route("/post/<string:languages_slug>", methods=['GET'])
 def post(languages_slug):
     languages = Languages.query.filter_by(slug=languages_slug).first()
-    return render_template('post2.html',languages=languages,params=params)
+    return render_template('post.html',language=languages,params=params)
 
 @app.route("/about")
 def about():
