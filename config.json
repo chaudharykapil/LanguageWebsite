@@ -2,15 +2,14 @@
     "params":
     {
         "localserver": "True",
-        "local_uri" : "mysql+pymysql://root:@localhost/codingthunder",
-        "prod_uri": "mysql+pymysql://root:@localhost/codingthunder",
+        "local_uri" : "mysql+pymysql://root:@localhost/language project",
+        "prod_uri": "mysql+pymysql://root:@localhost/language project",
         "fb_url": "https://facebook.com/codingthunder",
         "tw_url":"https://.twitter.com/codingthunder",
         "git_url":"https://.github.com/codingthunder",
         "blog_name": "Shubham Blog",
         "sub_name":"A Blog Liked By Programmers",
         "gmail-user":"lucent8791@gmail.com",
-        "gmail-password":"Shubham123@" ,
-        "post_slug":"abc"
+        "gmail-password":"Shubham123@" 
     }
 }
