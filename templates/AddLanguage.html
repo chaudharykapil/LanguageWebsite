@@ -1,0 +1,53 @@
+{% extends 'layout.html' %}
+{%block body%}
+
+
+<!-- Page Header-->
+        <header class="masthead" style="background-image: url('static/assets/img/about-bg.jpg')">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="page-heading">
+                            <h1>Admin Panel</h1>
+                            <span class="subheading">Add Languages</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        {% if message %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>"Success"</strong> {{message}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endif %}
+        <form action = "/addlanguage" method = "POST">
+            <div class="form-group">
+                <label for="exampleFormControlInput1">Name</label>
+                <input type="text" class="form-control" name="name" id="exampleFormControlInput1" placeholder="Name">
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1">Description</label>
+                <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3" placeholder = "300 words only"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlInput1">Website link(If any)</label>
+                <input type="text" class="form-control" name="web_link" id="exampleFormControlInput1" placeholder="Website Link">
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlInput1">Download Link(If any)</label>
+                <input type="text" class="form-control" name="down_link" id="exampleFormControlInput1" placeholder="Download Link">
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlInput1">Documentation Link(If any)</label>
+                <input type="text" class="form-control" name="document_link" id="exampleFormControlInput1" placeholder="Documentation Link">
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlInput1">Logo Link(If any)</label>
+                <input type="text" class="form-control" name="logo_link" id="exampleFormControlInput1" placeholder="Logo Link">
+            </div>
+            <button type = "submit"  class="btn btn-primary">Add Language</button>
+        </form>
+        
+          
+{% endblock %}

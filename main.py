@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request
+from flask.wrappers import Request
 from flask_sqlalchemy import SQLAlchemy
 from flask_mail import Mail
 import json
@@ -20,16 +21,16 @@ app.config.update(
 mail = Mail(app)
 if(local_server):
     app.config['SQLALCHEMY_DATABASE_URI'] = params['local_uri']
+    #app.config['SQLALCHEMY_DATABASE_URI'] = params['kapil_database']
 else:
     app.config['SQLALCHEMY_DATABASE_URI'] = params['prod_uri']
 
 db = SQLAlchemy(app)
-print("this is change")
 
 class Contacts(db.Model):
     sno = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), nullable=False)
-    phone_num = db.Column(db.String(12), nullable=False)
+    phone_num = db.Column(db.String(10), nullable=False)
     msg = db.Column(db.String(120), nullable=False)
     date = db.Column(db.String(12), nullable=True)
     email = db.Column(db.String(20), nullable=False)
@@ -37,20 +38,18 @@ class Contacts(db.Model):
 class Languages(db.Model):
     sno = db.Column(db.Integer, primary_key=True)
     name= db.Column(db.String(80), nullable=False)
-    decription = db.Column(db.String(21), nullable=False)
-    website_link = db.Column(db.String(120), nullable=False)
-    download_link = db.Column(db.String(12), nullable=True)
-    documentation_link = db.Column(db.String(12), nullable=True)
-    other_link = db.Column(db.String(12), nullable=True)
-    logo = db.Column(db.String(12), nullable=True)
-    slug = db.Column(db.String(12), nullable=True)
+    decription = db.Column(db.String(300), nullable=False)
+    website_link = db.Column(db.String(120), nullable=True)
+    download_link = db.Column(db.String(120), nullable=True)
+    documentation_link = db.Column(db.String(120), nullable=True)
+    other_link = db.Column(db.String(120), nullable=True)
+    logo = db.Column(db.String(120), nullable=True)
+    slug = db.Column(db.String(100), nullable=True)
 
 
 @app.route("/")
 def home():
-    #yaha per fetch bhi to krna pedega post kr nahi yaha nahi aega ya to sare post fetch honge jitne bhi he data base me
-    languages= Languages.query.all() #yaha per sari post ki list aegi for index ke through ek ek post ko lelenge ok 
-    
+    languages= Languages.query.all() 
     return render_template('home.html', params=params,languages = languages)
 
 
@@ -80,6 +79,34 @@ def contact():
                           body = message + "\n" + phone
                           )
     return render_template('contact.html', params=params)
+
+@app.route("/addlanguage",methods = ["GET","POST"])
+def AddLanguage():
+    if request.method == "GET":
+        return render_template("AddLanguage.html", params=params)
+    if request.method == "POST":
+        name = request.form.get("name")
+        description = request.form.get("description")
+        web_link = request.form.get("web_link")
+        down_link = request.form.get("down_link")
+        document_link = request.form.get("document_link")
+        logo_link = request.form.get("logo_link")
+        language = Languages(
+            name = name,
+            decription = description,
+            website_link = web_link,
+            download_link = down_link,
+            documentation_link = document_link,
+            logo = logo_link,
+            slug = str(name).replace(" ","_")
+        )
+
+        db.session.add(language)
+        db.session.commit()
+        msg = str(name)+" added Successfully"
+        print(msg)
+        return render_template("AddLanguage.html", params=params,message = msg)
+app.run(debug=True)
 
 
 app.run(debug=True)
