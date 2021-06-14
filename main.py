@@ -35,7 +35,6 @@ class Contacts(db.Model):
     date = db.Column(db.String(12), nullable=True)
     email = db.Column(db.String(20), nullable=False)
 
-
 class Languages(db.Model):
     sno = db.Column(db.Integer, primary_key=True)
     name= db.Column(db.String(80), nullable=False)
@@ -108,3 +107,5 @@ def AddLanguage():
         return render_template("AddLanguage.html", params=params,message = msg)
 app.run(debug=True)
 
+
+app.run(debug=True)
