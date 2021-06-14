@@ -10,6 +10,8 @@
         "blog_name": "Shubham Blog",
         "sub_name":"A Blog Liked By Programmers",
         "gmail-user":"lucent8791@gmail.com",
-        "gmail-password":"Shubham123@" 
+        "gmail-password":"Shubham123@" ,
+        "flask_url":"https://flask.palletsprojects.com/en/2.0.x/",
+        "django_url":"https://docs.djangoproject.com/en/3.2/"
     }
 }
