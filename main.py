@@ -100,6 +100,7 @@ def AddLanguage():
             logo = logo_link,
             slug = str(name).replace(" ","_")
         )
+        
         db.session.add(language)
         db.session.commit()
         msg = str(name)+" added Successfully"
