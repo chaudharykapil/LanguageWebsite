@@ -20,8 +20,8 @@ app.config.update(
 )
 mail = Mail(app)
 if(local_server):
-    #app.config['SQLALCHEMY_DATABASE_URI'] = params['local_uri']
-    app.config['SQLALCHEMY_DATABASE_URI'] = params['kapil_database']
+    app.config['SQLALCHEMY_DATABASE_URI'] = params['local_uri']
+    #app.config['SQLALCHEMY_DATABASE_URI'] = params['kapil_database']
 else:
     app.config['SQLALCHEMY_DATABASE_URI'] = params['prod_uri']
 
@@ -100,7 +100,7 @@ def AddLanguage():
             logo = logo_link,
             slug = str(name).replace(" ","_")
         )
-        
+
         db.session.add(language)
         db.session.commit()
         msg = str(name)+" added Successfully"
