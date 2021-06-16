@@ -3,18 +3,20 @@
 
 
 <!-- Page Header-->
-        <header class="masthead" style="background-image: url('static/assets/img/about-bg.jpg')">
+        <header class="masthead" style="background-image: url('https://3.bp.blogspot.com/-SU5b3RM_PsM/WQ95BLoRZEI/AAAAAAAAS-8/55xRusBvAaAFjYmj5RXHqJDa4ucPwXcJQCK4B/s1600/Image%2Bresult%2Bfor%2BPrinciple%2Bof%2BProgramming%2BLanguage.jpg')">
             <div class="container position-relative px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
                         <div class="page-heading">
-                            <h1>Admin Panel</h1>
-                            <span class="subheading">Add Languages</span>
+                            <h1>A<span style="color: crimson;">d</span><span style="color: darkblue;">m</span>in<span style="color: rgb(153, 153, 248);">Panel</span></h1>
+                            <span class="subheading;"  style="color: rgb(244, 240, 248); font-size: xx-large" >Add Languages</span>
                         </div>
                     </div>
                 </div>
             </div>
         </header>
+
+        <!-- Main Content-->
         {% if message %}
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             <strong>"Success"</strong> {{message}}
@@ -46,6 +48,8 @@
                 <label for="exampleFormControlInput1">Logo Link(If any)</label>
                 <input type="text" class="form-control" name="logo_link" id="exampleFormControlInput1" placeholder="Logo Link">
             </div>
+
+            
             <button type = "submit"  class="btn btn-primary">Add Language</button>
         </form>
         

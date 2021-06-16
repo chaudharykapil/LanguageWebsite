@@ -106,4 +106,9 @@ def AddLanguage():
         msg = str(name)+" added Successfully"
         print(msg)
         return render_template("AddLanguage.html", params=params,message = msg)
-#app.run(debug=True)
+
+
+
+
+
+app.run(debug=True)
