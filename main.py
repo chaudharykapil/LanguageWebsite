@@ -55,12 +55,7 @@ class Languages(db.Model):
 
 @app.route("/")
 def home():
-    
-    languages= Languages.query.all()
-    
-    return render_template('home.html', params=params,languages = languages)
-
-
+    return render_template('home.html', params=params)
 @app.route("/post/<string:languages_slug>", methods=['GET'])
 def post(languages_slug):
     languages = Languages.query.filter_by(slug=languages_slug).first()
@@ -80,8 +75,8 @@ def login():
         password = request.form.get("password")
         #check if any user exist in database having same user id 
         user = Admin.query.filter_by(user_id = user_id).first()
-        if (user.user_id==user_id) or (user.password == password):
-                return redirect("/add")
+        if (user.user_id==user_id) and (user.password == password):
+                return redirect("/addlanguage")
         else:
             msg = "Email or Password may be wrong"
             return render_template("login.html", params=params,message = msg)
@@ -104,10 +99,10 @@ def contact():
     return render_template('contact.html', params=params)
 
 
-@app.route("/add",methods = ["GET","POST"])
+@app.route("/addlanguage",methods = ["GET","POST"])
 def Add():
     if request.method == "GET":
-        return render_template("add.html", params=params)
+        return render_template("addLanguage.html", params=params)
 
     if request.method == "POST":
         name = request.form.get("name")
@@ -130,5 +125,19 @@ def Add():
         db.session.commit()
         msg = str(name)+" added Successfully"
         print(msg)
-        return render_template("AddLanguage.html", params=params,message = msg)
+        return render_template("addLanguage.html", params=params,message = msg)
+
+
+@app.route("/language/<string:lan>")
+def showLanguages(lan):
+    return render_template("showlanguages.html")
+@app.route("/searchapi")
+def searchapi():
+    languages= Languages.query.all()
+    language_name = list(map(lambda x: x.name,languages))
+    language_dict = {}
+    for x in range(len(language_name)):
+        language_dict[x] = language_name[x]
+    print(language_dict)
+    return language_dict
 app.run(debug=True)
