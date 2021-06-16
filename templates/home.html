@@ -1,9 +1,9 @@
 {% extends "layout.html" %}
 {% block body %}
         
-
+        
         <!-- Page Header-->
-        <header class="masthead" style="background-image: url('static/assets/img/home-bg.jpg')">
+        <header class="masthead" style="background-image: url('static/assets/img/home-bg.jpg'); height:110vh;">
             <div class="container position-relative px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 mx-auto">
@@ -11,27 +11,34 @@
                             <h1>{{params['blog_name']}}</h1>
                             <span class="subheading">{{params['sub_name']}}</span>
                         </div>
+                        <div class="container">
+                            <div class="row height d-flex justify-content-center align-items-center">
+                                <div class="col-md-8">
+                                    <div class="search"> <i class="fa fa-search"></i> <input type="text" class="form-control" id="searchbox" placeholder="Have a question? Ask Now"> <button class="btn btn-primary">Search</button> </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </header>
-
-        <!-- Main Content-->
+        <!--
+         Main Content
         <div class="container px-4 px-lg-5">
             <div class="row gx-4 gx-lg-5 justify-content-center">
                 <div class="col-md-10 col-lg-8 col-xl-7">
 
-                    <!-- for loop for fetching all the data one by one  from the database post table-->
+                     for loop for fetching all the data one by one  from the database post table
                     {% for language in languages  %}
                    
-                    <!-- Post preview-->
+                    ] Post preview
                     <div class="post-preview">
                         <a href="/post/{{language.slug}}">
                             <ol>
                                 <li type="none"><h2 class="post-title">{{language.name}}</h2></li>
                             </ol>
                         </a>
-                        <!-- <ol>
+                         <ol>
                             <ol><span class="subheading">Frameworks:</span>
                                 <a href="https://flask.palletsprojects.com/en/2.0.x/"><ol>
                                     <li>Flask</li>
@@ -39,17 +46,73 @@
                                     
                                 </ol></a>
                                 
-                        </ol> -->
+                        </ol> 
                             
                     </div>
-                    <!-- Divider-->
+                     Divider
                     <hr class="my-4" />
                     {% endfor %}
-
+                    
+                    
+                     Pager
+                    <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="/">Older Posts →</a></div>
+                </div>
             </div>
         </div>
+        -->
+        <style>
+
+            body {
+                background-color: #eee;
+                font-family: "Poppins", sans-serif;
+                font-weight: 300
+            }
+
+            .height {
+                height: 30vh
+            }
+
+            .search {
+                position: relative;
+                box-shadow: 0 0 40px rgba(51, 51, 51, .1)
+            }
+
+            .search input {
+                height: 60px;
+                text-indent: 25px;
+                border: 2px solid #d6d4d4
+            }
+
+            .search input:focus {
+                box-shadow: none;
+                border: 2px solid blue
+            }
+
+            .search .fa-search {
+                position: absolute;
+                top: 20px;
+                left: 16px
+            }
+
+            .search button {
+                position: absolute;
+                top: 5px;
+                right: 5px;
+                height: 50px;
+                width: 110px;
+                background: blue
+            }
+        </style>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
+        <script>
+            $(document).ready(()=>{
+                
+            })
+        </script>
 
 
-        {% endblock %}
+
+{% endblock %}
 
         

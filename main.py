@@ -55,7 +55,9 @@ class Languages(db.Model):
 
 @app.route("/")
 def home():
-    languages= Languages.query.all() 
+    
+    languages= Languages.query.all()
+    
     return render_template('home.html', params=params,languages = languages)
 
 
@@ -128,6 +130,5 @@ def Add():
         db.session.commit()
         msg = str(name)+" added Successfully"
         print(msg)
-        return render_template("add.html", params=params,message = msg)
-
+        return render_template("AddLanguage.html", params=params,message = msg)
 app.run(debug=True)
