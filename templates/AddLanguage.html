@@ -8,7 +8,7 @@
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
                         <div class="page-heading">
-                            <h1>A<span style="color: crimson;">d</span><span style="color: darkblue;">m</span>in<span style="color: rgb(153, 153, 248);">Panel</span></h1>
+                            <h1>A <span style="color: crimson;">d</span> <span style="color: darkblue;">m</span> in <span style="color: rgb(153, 153, 248);">Panel</span></h1>
                             <span class="subheading;"  style="color: rgb(244, 240, 248); font-size: xx-large" >Add Languages</span>
                         </div>
                     </div>
@@ -16,42 +16,52 @@
             </div>
         </header>
 
-        <!-- Main Content-->
+<!-- Main Content-->
+
         {% if message %}
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             <strong>"Success"</strong> {{message}}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         {% endif %}
-        <form action = "/addlanguage" method = "POST">
-            <div class="form-group">
-                <label for="exampleFormControlInput1">Name</label>
-                <input type="text" class="form-control" name="name" id="exampleFormControlInput1" placeholder="Name">
-            </div>
-            <div class="form-group">
-                <label for="exampleFormControlTextarea1">Description</label>
-                <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3" placeholder = "300 words only"></textarea>
-            </div>
-            <div class="form-group">
-                <label for="exampleFormControlInput1">Website link(If any)</label>
-                <input type="text" class="form-control" name="web_link" id="exampleFormControlInput1" placeholder="Website Link">
-            </div>
-            <div class="form-group">
-                <label for="exampleFormControlInput1">Download Link(If any)</label>
-                <input type="text" class="form-control" name="down_link" id="exampleFormControlInput1" placeholder="Download Link">
-            </div>
-            <div class="form-group">
-                <label for="exampleFormControlInput1">Documentation Link(If any)</label>
-                <input type="text" class="form-control" name="document_link" id="exampleFormControlInput1" placeholder="Documentation Link">
-            </div>
-            <div class="form-group">
-                <label for="exampleFormControlInput1">Logo Link(If any)</label>
-                <input type="text" class="form-control" name="logo_link" id="exampleFormControlInput1" placeholder="Logo Link">
-            </div>
+        <main class="mb-4">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <p>You van Add languages here</p>
+                        <div class="my-5">
+                            <form name="sentmessage" id="contactform" action="/add" method="POST" novalidate>
+                                <div class="form-floating">
+                                    <input class="form-control" id="inputName" name="name" placeholder="Enter your name..." />
+                                    <label for="inputName">Name</label>
+                                </div>
+                                <div class="form-floating">
+                                    <textarea class="form-control" id="inputdescription" row="4" name="description" placeholder="Add Description...."></textarea>
+                                    <label for="inputdescription">Description</label>
+                                </div>
+                                <div class="form-floating">
+                                    <input class="form-control" id="inputwebsite_link"  name="website_link" placeholder="Website_link"/>
+                                    <label for="inputwebsite_link">Website_link(if any)</label>
+                                </div>                                
+                                <div class="form-floating">
+                                    <input class="form-control" id="inputdownload_link" placeholder="Download_link" name="download_link">
+                                    <label for="inputdownload_link">Download_link</label>
+                                </div>
+                                <div class="form-floating">
+                                    <input class="form-control" id="inputdocumentation_link" placeholder="Documentation_link" name="documentation_link">
+                                    <label for="inputdocumentation_link">Documentation_link</label>
+                                </div>
+                                <div class="form-floating">
+                                    <Input class="form-control" id="inputlogo_link" placeholder="Logo_link" name="Logo_link">
+                                    <label for="inputlogo_link">Logo_link</label>
+                                </div>
 
-            
-            <button type = "submit"  class="btn btn-primary">Add Language</button>
-        </form>
-        
-          
-{% endblock %}
+                                <br />
+                                <button class="btn btn-primary text-uppercase" type="submit">Add language</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+{% endblock %}        
