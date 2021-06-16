@@ -1,12 +1,8 @@
-from flask import Flask, render_template, request
-from flask.helpers import url_for
-from flask.wrappers import Request
+from flask import Flask, render_template, request,redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_mail import Mail
 import json
 from datetime import datetime
-
-from werkzeug.utils import redirect
 
 
 with open('config.json', 'r') as c:
@@ -23,8 +19,8 @@ app.config.update(
 )
 mail = Mail(app)
 if(local_server):
-    app.config['SQLALCHEMY_DATABASE_URI'] = params['local_uri']
-    #app.config['SQLALCHEMY_DATABASE_URI'] = params['kapil_database']
+    #app.config['SQLALCHEMY_DATABASE_URI'] = params['local_uri']
+    app.config['SQLALCHEMY_DATABASE_URI'] = params['kapil_database']
 else:
     app.config['SQLALCHEMY_DATABASE_URI'] = params['prod_uri']
 
