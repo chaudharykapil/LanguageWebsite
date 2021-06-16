@@ -2,7 +2,7 @@
     "params":
     {
         "localserver": "True",
-        "local_uri" : "mysql+pymysql://root:kapil@localhost/language project",
+        "local_uri" : "mysql+pymysql://root:@localhost/language project",
         "kapil_database" : "mysql+pymysql://root:kapil@localhost/language_project",
         "prod_uri": "mysql+pymysql://root:@localhost/language project",
         "fb_url": "https://facebook.com/codingthunder",
