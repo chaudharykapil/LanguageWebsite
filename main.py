@@ -1,10 +1,8 @@
-from flask import Flask, render_template, request,redirect
+from flask import Flask, render_template, request,redirect,abort
 from flask_sqlalchemy import SQLAlchemy
 from flask_mail import Mail
 import json
 from datetime import datetime
-
-
 with open('config.json', 'r') as c:
     params = json.load(c)["params"]
 
@@ -23,9 +21,7 @@ if(local_server):
     app.config['SQLALCHEMY_DATABASE_URI'] = params['kapil_database']
 else:
     app.config['SQLALCHEMY_DATABASE_URI'] = params['prod_uri']
-
 db = SQLAlchemy(app)
-
 class Admin(db.Model):
     sno = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), nullable=False)
@@ -100,7 +96,7 @@ def contact():
 
 
 @app.route("/addlanguage",methods = ["GET","POST"])
-def Add():
+def AddLanguage():
     if request.method == "GET":
         return render_template("addLanguage.html", params=params)
 
@@ -120,17 +116,24 @@ def Add():
             logo = logo_link,
             slug = str(name).replace(" ","_")
         )
-
         db.session.add(language)
         db.session.commit()
         msg = str(name)+" added Successfully"
-        print(msg)
         return render_template("addLanguage.html", params=params,message = msg)
 
 
 @app.route("/language/<string:lan>")
 def showLanguages(lan):
-    return render_template("showlanguages.html")
+    if lan == "":
+        abort(404)
+    elif lan == "all":
+        languages = Languages.query.all()
+    else:
+        languages = Languages.query.filter_by(name = lan).all()
+        print(languages)
+        if not languages:
+            return abort(404)
+    return render_template("showlanguages.html",languages = languages)
 @app.route("/searchapi")
 def searchapi():
     languages= Languages.query.all()
@@ -138,6 +141,5 @@ def searchapi():
     language_dict = {}
     for x in range(len(language_name)):
         language_dict[x] = language_name[x]
-    print(language_dict)
     return language_dict
 app.run(debug=True)
