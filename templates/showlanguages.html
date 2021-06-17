@@ -16,11 +16,14 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        <li class="nav-item">
+            <a class="nav-link" href="/">Home <span class="sr-only"></span></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
+            <a class="nav-link" href="/about">About <span class="sr-only"></span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/contact">Contact <span class="sr-only"></span></a>
         </li>
     </div>
     </nav>
@@ -35,6 +38,7 @@
     <div class="box">
         <div class="container">
             <div class="row">
+                {% for lang in languages %}
                 
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                 
@@ -43,112 +47,18 @@
                             <i class="fa fa-instagram fa-3x" aria-hidden="true"></i>
                             
                             <div class="title">
-                                <h4>Instagram</h4>
+                                <h4>{{lang.name}}</h4>
                             </div>
                             
                             <div class="text">
-                                <span>Lorem ipsum dolor sit amet, id quo eruditi eloquentiam. Assum decore te sed. Elitr scripta ocurreret qui ad.</span>
+                                <span>{{lang.description}}</span>
                             </div>
                             
-                            <a href="#">Learn More</a>
-                            
-                        </div>
-                    </div>	 
-                    
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                
-                        <div class="box-part text-center">
-                            
-                            <i class="fa fa-twitter fa-3x" aria-hidden="true"></i>
-                        
-                            <div class="title">
-                                <h4>Twitter</h4>
-                            </div>
-                            
-                            <div class="text">
-                                <span>Lorem ipsum dolor sit amet, id quo eruditi eloquentiam. Assum decore te sed. Elitr scripta ocurreret qui ad.</span>
-                            </div>
-                            
-                            <a href="#">Learn More</a>
-                            
-                        </div>
-                    </div>	 
-                    
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                
-                        <div class="box-part text-center">
-                            
-                            <i class="fa fa-facebook fa-3x" aria-hidden="true"></i>
-                            
-                            <div class="title">
-                                <h4>Facebook</h4>
-                            </div>
-                            
-                            <div class="text">
-                                <span>Lorem ipsum dolor sit amet, id quo eruditi eloquentiam. Assum decore te sed. Elitr scripta ocurreret qui ad.</span>
-                            </div>
-                            
-                            <a href="#">Learn More</a>
-                            
-                        </div>
-                    </div>	 
-                    
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                
-                        <div class="box-part text-center">
-                            
-                            <i class="fa fa-pinterest-p fa-3x" aria-hidden="true"></i>
-                            
-                            <div class="title">
-                                <h4>Pinterest</h4>
-                            </div>
-                            
-                            <div class="text">
-                                <span>Lorem ipsum dolor sit amet, id quo eruditi eloquentiam. Assum decore te sed. Elitr scripta ocurreret qui ad.</span>
-                            </div>
-                            
-                            <a href="#">Learn More</a>
-                            
-                        </div>
-                    </div>	 
-                    
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                
-                        <div class="box-part text-center">
-                            
-                            <i class="fa fa-google-plus fa-3x" aria-hidden="true"></i>
-                        
-                            <div class="title">
-                                <h4>Google</h4>
-                            </div>
-                            
-                            <div class="text">
-                                <span>Lorem ipsum dolor sit amet, id quo eruditi eloquentiam. Assum decore te sed. Elitr scripta ocurreret qui ad.</span>
-                            </div>
-                            
-                            <a href="#">Learn More</a>
-                            
-                        </div>
-                    </div>	 
-                    
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                
-                        <div class="box-part text-center">
-                            
-                            <i class="fa fa-github fa-3x" aria-hidden="true"></i>
-                            
-                            <div class="title">
-                                <h4>Github</h4>
-                            </div>
-                            
-                            <div class="text">
-                                <span>Lorem ipsum dolor sit amet, id quo eruditi eloquentiam. Assum decore te sed. Elitr scripta ocurreret qui ad.</span>
-                            </div>
-                            
-                            <a href="#">Learn More</a>
+                            <a href="/post/{{lang.slug}}">Show more details</a>
                             
                         </div>
                     </div>
+                    {% endfor %}	 
             
             </div>		
         </div>
