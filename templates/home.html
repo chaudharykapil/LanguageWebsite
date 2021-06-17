@@ -12,7 +12,7 @@
                         <div class="container">
                             <div class="row height d-flex justify-content-center align-items-center">
                                 <div class="col-md-8">
-                                    <div class="search"> <i class="fa fa-search"></i> <input type="text" class="form-control" id="searchbox" placeholder="Have a question? Ask Now"> <button onclick="gotolanguage()" class="btn btn-primary">Search</button></div>
+                                    <div class="search"> <i class="fa fa-search"></i> <input type="text" class="form-control" id="searchbox" placeholder="Search for Language"> <button onclick="gotolanguage()" class="btn btn-primary">Search</button></div>
                                 </div>
                                 <button onclick="showallLanguage()" style="width: 300px; border-radius: 50px;" type="button" class="btn btn-outline-success">Show All Languages</button>
                             </div>
@@ -40,6 +40,7 @@
                     })
                 })
             })
+            // function for buttons
             function gotolanguage(){
                 let lan = $("#searchbox").val()
                 window.location.href = `/language/${lan}`
