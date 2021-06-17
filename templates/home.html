@@ -1,9 +1,7 @@
 {% extends "layout.html" %}
 {% block body %}
-        
-
         <!-- Page Header-->
-        <header class="masthead" style="background-image: url('static/assets/img/home-bg.jpg')">
+        <header class="masthead" style="background-image: url('static/assets/img/home-bg.jpg'); height:110vh;">
             <div class="container position-relative px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 mx-auto">
@@ -11,45 +9,49 @@
                             <h1>{{params['blog_name']}}</h1>
                             <span class="subheading">{{params['sub_name']}}</span>
                         </div>
+                        <div class="container">
+                            <div class="row height d-flex justify-content-center align-items-center">
+                                <div class="col-md-8">
+                                    <div class="search"> <i class="fa fa-search"></i> <input type="text" class="form-control" id="searchbox" placeholder="Search for Language"> <button onclick="gotolanguage()" class="btn btn-primary">Search</button></div>
+                                </div>
+                                <button onclick="showallLanguage()" style="width: 300px; border-radius: 50px;" type="button" class="btn btn-outline-success">Show All Languages</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </header>
+        <link rel="stylesheet" href="{{url_for('static',filename = '/css/HomeCustom.css')}}">
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 
-        <!-- Main Content-->
-        <div class="container px-4 px-lg-5">
-            <div class="row gx-4 gx-lg-5 justify-content-center">
-                <div class="col-md-10 col-lg-8 col-xl-7">
-
-                    <!-- for loop for fetching all the data one by one  from the database post table-->
-                    {% for language in languages  %}
-                   
-                    <!-- Post preview-->
-                    <div class="post-preview">
-                        <a href="/post/{{language.slug}}">
-                            <ol>
-                                <li type="none"><h2 class="post-title">{{language.name}}</h2></li>
-                            </ol>
-                        </a>
-                        <!-- <ol>
-                            <ol><span class="subheading">Frameworks:</span>
-                                <a href="https://flask.palletsprojects.com/en/2.0.x/"><ol>
-                                    <li>Flask</li>
-                                    <a href="https://docs.djangoproject.com/en/3.2/"><li>Django</li></a>
-                                    
-                                </ol></a>
-                                
-                        </ol> -->
-                            
-                    </div>
-                    <!-- Divider-->
-                    <hr class="my-4" />
-                    {% endfor %}
-
-            </div>
-        </div>
+        <!--not completed yet-->
+        <script>
+            $(document).ready(()=>{
+                fetch("/searchapi").then(res=>{
+                    res.text().then((val)=>{
+                        let all_language = []
+                        let jsonval = JSON.parse(val)
+                        for (let x in jsonval){
+                            all_language.push(jsonval[x])
+                        }
+                        $("#searchbox").on("input",(e)=>{
+                            console.log($("#searchbox").val())
+                        })
+                    })
+                })
+            })
+            // function for buttons
+            function gotolanguage(){
+                let lan = $("#searchbox").val()
+                window.location.href = `/language/${lan}`
+            }
+            function showallLanguage(){
+                window.location.href = `/language/all`
+            }
+        </script>
 
 
-        {% endblock %}
+
+{% endblock %}
 
         
