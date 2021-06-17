@@ -1,9 +1,12 @@
 from flask import Flask, render_template, request
+from flask.helpers import url_for
 from flask.wrappers import Request
 from flask_sqlalchemy import SQLAlchemy
 from flask_mail import Mail
 import json
 from datetime import datetime
+
+from werkzeug.utils import redirect
 
 
 with open('config.json', 'r') as c:
@@ -26,6 +29,13 @@ else:
     app.config['SQLALCHEMY_DATABASE_URI'] = params['prod_uri']
 
 db = SQLAlchemy(app)
+
+class Admin(db.Model):
+    sno = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80), nullable=False)
+    lastname = db.Column(db.String(80), nullable=False)
+    user_id = db.Column(db.String(80), nullable=False)
+    password = db.Column(db.String(30), nullable=False)
 
 class Contacts(db.Model):
     sno = db.Column(db.Integer, primary_key=True)
@@ -63,6 +73,21 @@ def about():
     return render_template('about.html', params=params)
 
 
+@app.route("/login",methods = ["POST","GET"])
+def login():
+    if request.method == "GET":
+        return render_template("login.html", params=params)
+    if request.method == "POST":
+        user_id = request.form.get("user_id")
+        password = request.form.get("password")
+        #check if any user exist in database having same user id 
+        user = Admin.query.filter_by(user_id = user_id).first()
+        if (user.user_id==user_id) or (user.password == password):
+                return redirect("/add")
+        else:
+            msg = "Email or Password may be wrong"
+            return render_template("login.html", params=params,message = msg)
+
 @app.route("/contact", methods = ['GET', 'POST'])
 def contact():
     if(request.method=='POST'):
@@ -80,10 +105,12 @@ def contact():
                           )
     return render_template('contact.html', params=params)
 
-@app.route("/addlanguage",methods = ["GET","POST"])
-def AddLanguage():
+
+@app.route("/add",methods = ["GET","POST"])
+def Add():
     if request.method == "GET":
-        return render_template("AddLanguage.html", params=params)
+        return render_template("add.html", params=params)
+
     if request.method == "POST":
         name = request.form.get("name")
         description = request.form.get("description")
@@ -105,10 +132,6 @@ def AddLanguage():
         db.session.commit()
         msg = str(name)+" added Successfully"
         print(msg)
-        return render_template("AddLanguage.html", params=params,message = msg)
-
-
-
-
+        return render_template("add.html", params=params,message = msg)
 
 app.run(debug=True)

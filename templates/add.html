@@ -1,0 +1,67 @@
+{% extends 'layout.html' %}
+{%block body%}
+
+
+<!-- Page Header-->
+        <header class="masthead" style="background-image: url('https://3.bp.blogspot.com/-SU5b3RM_PsM/WQ95BLoRZEI/AAAAAAAAS-8/55xRusBvAaAFjYmj5RXHqJDa4ucPwXcJQCK4B/s1600/Image%2Bresult%2Bfor%2BPrinciple%2Bof%2BProgramming%2BLanguage.jpg')">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="page-heading">
+                            <h1>A <span style="color: crimson;">d</span> <span style="color: darkblue;">m</span> in <span style="color: rgb(153, 153, 248);">Panel</span></h1>
+                            <span class="subheading;"  style="color: rgb(244, 240, 248); font-size: xx-large" >Add Languages</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+<!-- Main Content-->
+
+        {% if message %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>"Success"</strong> {{message}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endif %}
+        <main class="mb-4">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <p>You van Add languages here</p>
+                        <div class="my-5">
+                            <form name="sentmessage" id="contactform" action="/add" method="POST" novalidate>
+                                <div class="form-floating">
+                                    <input class="form-control" id="inputName" name="name" placeholder="Enter your name..." />
+                                    <label for="inputName">Name</label>
+                                </div>
+                                <div class="form-floating">
+                                    <textarea class="form-control" id="inputdescription" row="4" name="description" placeholder="Add Description...."></textarea>
+                                    <label for="inputdescription">Description</label>
+                                </div>
+                                <div class="form-floating">
+                                    <input class="form-control" id="inputwebsite_link"  name="website_link" placeholder="Website_link"/>
+                                    <label for="inputwebsite_link">Website_link(if any)</label>
+                                </div>                                
+                                <div class="form-floating">
+                                    <input class="form-control" id="inputdownload_link" placeholder="Download_link" name="download_link">
+                                    <label for="inputdownload_link">Download_link</label>
+                                </div>
+                                <div class="form-floating">
+                                    <input class="form-control" id="inputdocumentation_link" placeholder="Documentation_link" name="documentation_link">
+                                    <label for="inputdocumentation_link">Documentation_link</label>
+                                </div>
+                                <div class="form-floating">
+                                    <Input class="form-control" id="inputlogo_link" placeholder="Logo_link" name="Logo_link">
+                                    <label for="inputlogo_link">Logo_link</label>
+                                </div>
+
+                                <br />
+                                <button class="btn btn-primary text-uppercase" type="submit">Add language</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+{% endblock %}        

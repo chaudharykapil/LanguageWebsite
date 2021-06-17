@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<header class="masthead" style="background-image: url('static/assets/img/contact-bg.jpg')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="page-heading">
+                    <h1>Login</h1>
+                    <span class="subheading">login first to access Admin portal</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- Main Content-->
+<main class="mb-4">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                {% if message %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <strong>"Error"</strong> {{message}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endif %}
+                <div class="my-5">
+                    <form name="sentmessage" id="contactform" action="/login" method="POST" novalidate>
+                        <div class="form-floating">
+                            <input class="form-control" id="inputName"  name="name" placeholder="Enter your name..." />
+                            <label for="inputName">Name</label>
+                        </div>
+                        <div class="form-floating">
+                            <input class="form-control" id="inputlastname"  name="last Name" placeholder="Enter your lastname.." />
+                            <label for="inputlastname">Last Name</label>
+                        </div>
+                        <div class="form-floating">
+                            <input class="form-control" id="inputuser_id"  name="user_id" placeholder="Enter your User_id (id will be email)..." />
+                            <label for="inputuser_id">User_id</label>
+                        </div>
+                        <div class="form-floating">
+                            <input class="form-control" id="inputpassword" aria-hidden="true" type="password"  aria-hidden="true"
+                             placeholder="Enter your message here..." name="password" >
+                            <label for="inputpassword"  >Password</label>
+                        </div>
+                        <br />
+                        <a href="/add"><button class="btn btn-primary text-uppercase" type="logn">Login</button></a>
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+{% endblock %}
