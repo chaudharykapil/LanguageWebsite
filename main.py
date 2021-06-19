@@ -17,8 +17,8 @@ app.config.update(
 )
 mail = Mail(app)
 if(local_server):
-    #app.config['SQLALCHEMY_DATABASE_URI'] = params['local_uri']
-    app.config['SQLALCHEMY_DATABASE_URI'] = params['kapil_database']
+    app.config['SQLALCHEMY_DATABASE_URI'] = params['local_uri']
+    #app.config['SQLALCHEMY_DATABASE_URI'] = params['kapil_database']
 else:
     app.config['SQLALCHEMY_DATABASE_URI'] = params['prod_uri']
 db = SQLAlchemy(app)
@@ -41,12 +41,12 @@ class Languages(db.Model):
     sno = db.Column(db.Integer, primary_key=True)
     name= db.Column(db.String(80), nullable=False)
     decription = db.Column(db.String(300), nullable=False)
-    website_link = db.Column(db.String(120), nullable=True)
-    download_link = db.Column(db.String(120), nullable=True)
-    documentation_link = db.Column(db.String(120), nullable=True)
+    website_link = db.Column(db.String(120), nullable=False)
+    download_link = db.Column(db.String(120), nullable=False)
+    documentation_link = db.Column(db.String(120), nullable=False)
     other_link = db.Column(db.String(120), nullable=True)
-    logo = db.Column(db.String(120), nullable=True)
-    slug = db.Column(db.String(100), nullable=True)
+    logo = db.Column(db.String(120), nullable=False)
+    slug = db.Column(db.String(100), nullable=False)
 
 
 @app.route("/")
@@ -71,8 +71,8 @@ def login():
         password = request.form.get("password")
         #check if any user exist in database having same user id 
         user = Admin.query.filter_by(user_id = user_id).first()
-        if (user.user_id==user_id) and (user.password == password):
-                return redirect("/addlanguage")
+        if (user.user_id==user_id) or (user.password == password):
+                return render_template("add.html", params=params)
         else:
             msg = "Email or Password may be wrong"
             return render_template("login.html", params=params,message = msg)
@@ -98,19 +98,19 @@ def contact():
 @app.route("/addlanguage",methods = ["GET","POST"])
 def AddLanguage():
     if request.method == "GET":
-        return render_template("addLanguage.html", params=params)
+        return render_template("add.html", params=params)
 
     if request.method == "POST":
         name = request.form.get("name")
         description = request.form.get("description")
-        web_link = request.form.get("web_link")
-        down_link = request.form.get("down_link")
-        document_link = request.form.get("document_link")
+        web_link = request.form.get("website_link")
+        down_link = request.form.get("download_link")
+        document_link = request.form.get("documentation_link")
         logo_link = request.form.get("logo_link")
         language = Languages(
             name = name,
             decription = description,
-            website_link = web_link,
+            website_link =  web_link,
             download_link = down_link,
             documentation_link = document_link,
             logo = logo_link,
@@ -119,7 +119,7 @@ def AddLanguage():
         db.session.add(language)
         db.session.commit()
         msg = str(name)+" added Successfully"
-        return render_template("addLanguage.html", params=params,message = msg)
+        return render_template("add.html", params=params,message = msg)
 
 
 @app.route("/language/<string:lan>")
